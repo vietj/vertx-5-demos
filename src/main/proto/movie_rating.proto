@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+option java_multiple_files = true;
+option java_package = "examples.movie_rating";
+
+package examples.grpc;
+
+service MovieRatingDatabase {
+  rpc GetMovieDetails (MovieId) returns (MovieDetails) {
+    option (google.api.http) = {
+      get: "/movie_details/{id}"
+    };
+  }
+  rpc RateMovie (MovieRating) returns (Empty) {
+    option (google.api.http) = {
+      post: "/movie_ratings"
+    };
+  }
+  rpc GetMovieRating (MovieId) returns (MovieRatingDetails) {
+    option (google.api.http) = {
+      get: "/movie_ratings/{id}"
+    };
+  }
+}
+
+message Empty {
+
+}
+
+message MovieId {
+  string id = 1;
+}
+
+message MovieDetails {
+  string id = 1;
+  string title = 2;
+}
+
+message MovieRating {
+  oneof test_oneof {
+    string id = 1;
+    string title = 2;
+  }
+  int32 rating = 3;
+}
+
+message MovieRatingDetails {
+  string id = 1;
+  int32 rating = 2;
+}
