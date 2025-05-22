@@ -8,6 +8,7 @@ import examples.movie_rating.*;
 import io.grpc.stub.StreamObserver;
 import io.vertx.core.Expectation;
 import io.vertx.core.Future;
+import io.vertx.core.VerticleBase;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.grpc.common.GrpcStatus;
@@ -19,7 +20,7 @@ import io.vertx.sqlclient.*;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
-public class Main {
+public class Main extends VerticleBase {
 
   public static void main(String[] args) {
 
@@ -34,6 +35,19 @@ public class Main {
 
     Vertx vertx = Vertx.vertx();
 
+    vertx.deployVerticle(new Main(options)).await();
+
+
+  }
+
+  private final PgConnectOptions options;
+
+  public Main(PgConnectOptions options) {
+    this.options = options;
+  }
+
+  @Override
+  public Future<?> start() throws Exception {
     Pool pool = Pool.pool(vertx, options, new PoolOptions());
 
     HttpServer httpServer = vertx.createHttpServer();
@@ -103,9 +117,8 @@ public class Main {
 
     httpServer.requestHandler(grpcServer);
 
-    httpServer
-      .listen(8080, "localhost")
-      .await();
+    return httpServer
+      .listen(8080, "localhost");
 
     // grpcurl -plaintext localhost:8080 list
     // grpcurl -plaintext localhost:8080 list examples.grpc.Greeter
@@ -117,15 +130,13 @@ public class Main {
     // curl --header "Content-Type: application/json" --request POST --data '{"name":"Julien"}' http://localhost:8080/examples.grpc.Greeter/SayHello
 
     // grpcurl -plaintext -d '{"id": "starwars"}' localhost:8080 examples.grpc.MovieRatingDatabase/GetMovieDetails
-    // grpcurl -plaintext -d '{"id": "starwars","rate":5}' localhost:8080 examples.grpc.MovieRatingDatabase/RateMovie
-    // grpcurl -plaintext -d '{"title": "Star Wars","rate":5}' localhost:8080 examples.grpc.MovieRatingDatabase/RateMovie
+    // grpcurl -plaintext -d '{"id": "starwars","rating":5}' localhost:8080 examples.grpc.MovieRatingDatabase/RateMovie
+    // grpcurl -plaintext -d '{"title": "Star Wars","rating":5}' localhost:8080 examples.grpc.MovieRatingDatabase/RateMovie
 
     // curl --header "Content-Type: application/json" http://localhost:8080/movie_details/starwars
     // curl --header "Content-Type: application/json" http://localhost:8080/movie_ratings/starwars
     // curl --header "Content-Type: application/json" --request POST --data '{"id":"starwars","rating":5}' http://localhost:8080/movie_ratings
-
   }
-
 
   private static final Expectation<? super RowSet<Row>> SINGLE_ROW = new Expectation<>() {
     @Override
