@@ -9,19 +9,25 @@ package examples.grpc;
 
 service MovieRatingDatabase {
   rpc GetMovieDetails (MovieId) returns (MovieDetails) {
+/*
     option (google.api.http) = {
       get: "/movie_details/{id}"
     };
+*/
   }
   rpc RateMovie (MovieRating) returns (Empty) {
+/*
     option (google.api.http) = {
       post: "/movie_ratings"
     };
+*/
   }
   rpc GetMovieRating (MovieId) returns (MovieRatingDetails) {
+/*
     option (google.api.http) = {
       get: "/movie_ratings/{id}"
     };
+*/
   }
 }
 

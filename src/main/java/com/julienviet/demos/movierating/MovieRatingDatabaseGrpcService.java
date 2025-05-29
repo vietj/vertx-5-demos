@@ -68,6 +68,33 @@ public class MovieRatingDatabaseGrpcService extends MovieRatingDatabaseService i
   }
 
   /**
+   * GetMovieDetails protobuf RPC server service method.
+   */
+  public static final ServiceMethod<com.julienviet.demos.movierating.MovieId, com.julienviet.demos.movierating.MovieDetails> GetMovieDetails = ServiceMethod.server(
+    SERVICE_NAME,
+    "GetMovieDetails",
+    GrpcMessageEncoder.encoder(),
+    GrpcMessageDecoder.decoder(com.julienviet.demos.movierating.MovieId.newBuilder()));
+
+  /**
+   * RateMovie protobuf RPC server service method.
+   */
+  public static final ServiceMethod<com.julienviet.demos.movierating.MovieRating, com.julienviet.demos.movierating.Empty> RateMovie = ServiceMethod.server(
+    SERVICE_NAME,
+    "RateMovie",
+    GrpcMessageEncoder.encoder(),
+    GrpcMessageDecoder.decoder(com.julienviet.demos.movierating.MovieRating.newBuilder()));
+
+  /**
+   * GetMovieRating protobuf RPC server service method.
+   */
+  public static final ServiceMethod<com.julienviet.demos.movierating.MovieId, com.julienviet.demos.movierating.MovieRatingDetails> GetMovieRating = ServiceMethod.server(
+    SERVICE_NAME,
+    "GetMovieRating",
+    GrpcMessageEncoder.encoder(),
+    GrpcMessageDecoder.decoder(com.julienviet.demos.movierating.MovieId.newBuilder()));
+
+  /**
    * @return a mutable list of the known protobuf RPC server service methods.
    */
   public static java.util.List<ServiceMethod<?, ?>> all() {
@@ -78,63 +105,6 @@ public class MovieRatingDatabaseGrpcService extends MovieRatingDatabaseService i
     return all;
   }
 
-
-  private static final io.vertx.grpc.transcoding.MethodTranscodingOptions GetMovieDetails_OPTIONS = new io.vertx.grpc.transcoding.MethodTranscodingOptions()
-    .setSelector("")
-    .setHttpMethod(HttpMethod.valueOf("GET"))
-    .setPath("/movie_details/{id}")
-    .setBody("")
-    .setResponseBody("")
-  ;
-
-  private static final io.vertx.grpc.transcoding.MethodTranscodingOptions RateMovie_OPTIONS = new io.vertx.grpc.transcoding.MethodTranscodingOptions()
-    .setSelector("")
-    .setHttpMethod(HttpMethod.valueOf("POST"))
-    .setPath("/movie_ratings")
-    .setBody("")
-    .setResponseBody("")
-  ;
-
-  private static final io.vertx.grpc.transcoding.MethodTranscodingOptions GetMovieRating_OPTIONS = new io.vertx.grpc.transcoding.MethodTranscodingOptions()
-    .setSelector("")
-    .setHttpMethod(HttpMethod.valueOf("GET"))
-    .setPath("/movie_ratings/{id}")
-    .setBody("")
-    .setResponseBody("")
-  ;
-
-  /**
-   * GetMovieDetails transcoded RPC server service method.
-   */
-  public static final io.vertx.grpc.transcoding.TranscodingServiceMethod<com.julienviet.demos.movierating.MovieId, com.julienviet.demos.movierating.MovieDetails> GetMovieDetails = io.vertx.grpc.transcoding.TranscodingServiceMethod.server(
-    SERVICE_NAME,
-    "GetMovieDetails",
-    GrpcMessageEncoder.encoder(),
-    GrpcMessageDecoder.decoder(com.julienviet.demos.movierating.MovieId.newBuilder()),
-    GetMovieDetails_OPTIONS
-  );
-
-  /**
-   * RateMovie transcoded RPC server service method.
-   */
-  public static final io.vertx.grpc.transcoding.TranscodingServiceMethod<com.julienviet.demos.movierating.MovieRating, com.julienviet.demos.movierating.Empty> RateMovie = io.vertx.grpc.transcoding.TranscodingServiceMethod.server(
-    SERVICE_NAME,
-    "RateMovie",
-    GrpcMessageEncoder.encoder(),
-    GrpcMessageDecoder.decoder(com.julienviet.demos.movierating.MovieRating.newBuilder()),
-    RateMovie_OPTIONS
-  );
-
-  /**
-   * GetMovieRating transcoded RPC server service method.
-   */
-  public static final io.vertx.grpc.transcoding.TranscodingServiceMethod<com.julienviet.demos.movierating.MovieId, com.julienviet.demos.movierating.MovieRatingDetails> GetMovieRating = io.vertx.grpc.transcoding.TranscodingServiceMethod.server(
-    SERVICE_NAME,
-    "GetMovieRating",
-    GrpcMessageEncoder.encoder(),
-    GrpcMessageDecoder.decoder(com.julienviet.demos.movierating.MovieId.newBuilder()),
-    GetMovieRating_OPTIONS
-  );
 
   /**
    * @return a free form builder that gives the opportunity to bind only certain methods of a service

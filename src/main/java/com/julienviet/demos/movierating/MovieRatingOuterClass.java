@@ -65,16 +65,14 @@ public final class MovieRatingOuterClass {
       "\001 \001(\t\022\r\n\005title\030\002 \001(\t\"J\n\013MovieRating\022\014\n\002i" +
       "d\030\001 \001(\tH\000\022\017\n\005title\030\002 \001(\tH\000\022\016\n\006rating\030\003 \001" +
       "(\005B\014\n\ntest_oneof\"0\n\022MovieRatingDetails\022\n" +
-      "\n\002id\030\001 \001(\t\022\016\n\006rating\030\002 \001(\0052\273\002\n\023MovieRati" +
-      "ngDatabase\022c\n\017GetMovieDetails\022\026.examples" +
+      "\n\002id\030\001 \001(\t\022\016\n\006rating\030\002 \001(\0052\357\001\n\023MovieRati" +
+      "ngDatabase\022H\n\017GetMovieDetails\022\026.examples" +
       ".grpc.MovieId\032\033.examples.grpc.MovieDetai" +
-      "ls\"\033\202\323\344\223\002\025\022\023/movie_details/{id}\022U\n\tRateM" +
-      "ovie\022\032.examples.grpc.MovieRating\032\024.examp" +
-      "les.grpc.Empty\"\026\202\323\344\223\002\020\"\016/movie_ratings\022h" +
-      "\n\016GetMovieRating\022\026.examples.grpc.MovieId" +
-      "\032!.examples.grpc.MovieRatingDetails\"\033\202\323\344" +
-      "\223\002\025\022\023/movie_ratings/{id}B$\n com.julienvi" +
-      "et.demos.movieratingP\001b\006proto3"
+      "ls\"\000\022?\n\tRateMovie\022\032.examples.grpc.MovieR" +
+      "ating\032\024.examples.grpc.Empty\"\000\022M\n\016GetMovi" +
+      "eRating\022\026.examples.grpc.MovieId\032!.exampl" +
+      "es.grpc.MovieRatingDetails\"\000B$\n com.juli" +
+      "enviet.demos.movieratingP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -113,11 +111,6 @@ public final class MovieRatingOuterClass {
         new java.lang.String[] { "Id", "Rating", });
     descriptor.resolveAllFeaturesImmutable();
     com.google.api.AnnotationsProto.getDescriptor();
-    com.google.protobuf.ExtensionRegistry registry =
-        com.google.protobuf.ExtensionRegistry.newInstance();
-    registry.add(com.google.api.AnnotationsProto.http);
-    com.google.protobuf.Descriptors.FileDescriptor
-        .internalUpdateFileDescriptor(descriptor, registry);
   }
 
   // @@protoc_insertion_point(outer_class_scope)

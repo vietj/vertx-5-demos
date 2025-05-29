@@ -169,6 +169,11 @@ public final class MovieRatingDatabaseGrpc {
   public interface AsyncService {
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *get: "/movie_details/{id}"
+     *};
+     * </pre>
      */
     default void getMovieDetails(com.julienviet.demos.movierating.MovieId request,
         io.grpc.stub.StreamObserver<com.julienviet.demos.movierating.MovieDetails> responseObserver) {
@@ -176,6 +181,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *post: "/movie_ratings"
+     *};
+     * </pre>
      */
     default void rateMovie(com.julienviet.demos.movierating.MovieRating request,
         io.grpc.stub.StreamObserver<com.julienviet.demos.movierating.Empty> responseObserver) {
@@ -183,6 +193,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *get: "/movie_ratings/{id}"
+     *};
+     * </pre>
      */
     default void getMovieRating(com.julienviet.demos.movierating.MovieId request,
         io.grpc.stub.StreamObserver<com.julienviet.demos.movierating.MovieRatingDetails> responseObserver) {
@@ -218,6 +233,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *get: "/movie_details/{id}"
+     *};
+     * </pre>
      */
     public void getMovieDetails(com.julienviet.demos.movierating.MovieId request,
         io.grpc.stub.StreamObserver<com.julienviet.demos.movierating.MovieDetails> responseObserver) {
@@ -226,6 +246,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *post: "/movie_ratings"
+     *};
+     * </pre>
      */
     public void rateMovie(com.julienviet.demos.movierating.MovieRating request,
         io.grpc.stub.StreamObserver<com.julienviet.demos.movierating.Empty> responseObserver) {
@@ -234,6 +259,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *get: "/movie_ratings/{id}"
+     *};
+     * </pre>
      */
     public void getMovieRating(com.julienviet.demos.movierating.MovieId request,
         io.grpc.stub.StreamObserver<com.julienviet.demos.movierating.MovieRatingDetails> responseObserver) {
@@ -259,6 +289,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *get: "/movie_details/{id}"
+     *};
+     * </pre>
      */
     public com.julienviet.demos.movierating.MovieDetails getMovieDetails(com.julienviet.demos.movierating.MovieId request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -266,6 +301,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *post: "/movie_ratings"
+     *};
+     * </pre>
      */
     public com.julienviet.demos.movierating.Empty rateMovie(com.julienviet.demos.movierating.MovieRating request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -273,6 +313,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *get: "/movie_ratings/{id}"
+     *};
+     * </pre>
      */
     public com.julienviet.demos.movierating.MovieRatingDetails getMovieRating(com.julienviet.demos.movierating.MovieId request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -297,6 +342,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *get: "/movie_details/{id}"
+     *};
+     * </pre>
      */
     public com.julienviet.demos.movierating.MovieDetails getMovieDetails(com.julienviet.demos.movierating.MovieId request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -304,6 +354,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *post: "/movie_ratings"
+     *};
+     * </pre>
      */
     public com.julienviet.demos.movierating.Empty rateMovie(com.julienviet.demos.movierating.MovieRating request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -311,6 +366,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *get: "/movie_ratings/{id}"
+     *};
+     * </pre>
      */
     public com.julienviet.demos.movierating.MovieRatingDetails getMovieRating(com.julienviet.demos.movierating.MovieId request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -335,6 +395,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *get: "/movie_details/{id}"
+     *};
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.julienviet.demos.movierating.MovieDetails> getMovieDetails(
         com.julienviet.demos.movierating.MovieId request) {
@@ -343,6 +408,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *post: "/movie_ratings"
+     *};
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.julienviet.demos.movierating.Empty> rateMovie(
         com.julienviet.demos.movierating.MovieRating request) {
@@ -351,6 +421,11 @@ public final class MovieRatingDatabaseGrpc {
     }
 
     /**
+     * <pre>
+     *option (google.api.http) = {
+     *get: "/movie_ratings/{id}"
+     *};
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.julienviet.demos.movierating.MovieRatingDetails> getMovieRating(
         com.julienviet.demos.movierating.MovieId request) {

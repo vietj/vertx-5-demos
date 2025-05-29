@@ -8,59 +8,39 @@ import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.grpc.common.GrpcStatus;
 import io.vertx.grpc.reflection.ReflectionService;
+import io.vertx.grpc.server.GrpcServer;
 import io.vertx.grpc.server.StatusException;
-import io.vertx.grpcio.server.GrpcIoServer;
 import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.sqlclient.*;
 
 import java.util.function.Function;
 
-public class Main extends VerticleBase {
+public class MovieRatings extends VerticleBase {
 
   public static void main(String[] args) {
     TestContainerHelper helper = new TestContainerHelper();
     PgConnectOptions options = helper.startDb();
     Vertx vertx = Vertx.vertx();
-    vertx.deployVerticle(new Main(options)).await();
+    vertx.deployVerticle(new MovieRatings(options)).await();
   }
 
   private final PgConnectOptions options;
 
-  public Main(PgConnectOptions options) {
+  public MovieRatings(PgConnectOptions options) {
     this.options = options;
   }
 
   @Override
   public Future<?> start() throws Exception {
+
     Pool pool = Pool.pool(vertx, options, new PoolOptions());
 
     HttpServer httpServer = vertx.createHttpServer();
 
-    GrpcIoServer grpcServer = GrpcIoServer.server(vertx);
+    GrpcServer grpcServer = GrpcServer.server(vertx);
 
     grpcServer.addService(ReflectionService.v1());
 
-/*
-    grpcServer.addService(new GreeterGrpc.GreeterImplBase() {
-      @Override
-      public void sayHello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
-        responseObserver.onNext(HelloReply.newBuilder().setMessage("Hello " + request.getName()).build());
-        responseObserver.onCompleted();
-      }
-    });
-*/
-
-/*
-    grpcServer.addService(new GreeterGrpcService() {
-      @Override
-      public Future<HelloReply> sayHello(HelloRequest request) {
-
-        return vertx
-          .timer(200) // Should be a database interaction
-          .map(v -> HelloReply.newBuilder().setMessage("Hello " + request.getName()).build());
-      }
-    });
-*/
 
     grpcServer.addService(new MovieRatingDatabaseGrpcService() {
       @Override
@@ -116,18 +96,16 @@ public class Main extends VerticleBase {
       .listen(8080, "localhost");
 
     // grpcurl -plaintext localhost:8080 list
-    // grpcurl -plaintext localhost:8080 list examples.grpc.Greeter
-    // grpcurl -plaintext localhost:8080 list examples.grpc.Greeter
-    // grpcurl -plaintext localhost:8080 describe examples.grpc.Greeter.SayHello
-    // grpcurl -plaintext -d '{"name": "Julien"}' localhost:8080 examples.grpc.Greeter/SayHello
-
-
-    // curl --header "Content-Type: application/json" --request POST --data '{"name":"Julien"}' http://localhost:8080/examples.grpc.Greeter/SayHello
+    // grpcurl -plaintext localhost:8080 list examples
+    // grpcurl -plaintext localhost:8080 list examples.grpc.MovieRatingDatabase
+    // grpcurl -plaintext localhost:8080 describe examples.grpc.MovieRatingDatabase
+    // grpcurl -plaintext localhost:8080 describe examples.grpc.MovieId
 
     // grpcurl -plaintext -d '{"id": "starwars"}' localhost:8080 examples.grpc.MovieRatingDatabase/GetMovieDetails
     // grpcurl -plaintext -d '{"id": "starwars","rating":5}' localhost:8080 examples.grpc.MovieRatingDatabase/RateMovie
     // grpcurl -plaintext -d '{"title": "Star Wars","rating":5}' localhost:8080 examples.grpc.MovieRatingDatabase/RateMovie
 
+    // curl --header "Content-Type: application/json" --request POST --data '{"id":"starwars"}' http://localhost:8080/examples.grpc.MovieRatingDatabase/GetMovieDetails
     // curl --header "Content-Type: application/json" http://localhost:8080/movie_details/starwars
     // curl --header "Content-Type: application/json" http://localhost:8080/movie_ratings/starwars
     // curl --header "Content-Type: application/json" --request POST --data '{"id":"starwars","rating":5}' http://localhost:8080/movie_ratings

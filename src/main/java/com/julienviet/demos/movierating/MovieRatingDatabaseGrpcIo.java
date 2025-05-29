@@ -56,17 +56,38 @@ public final class MovieRatingDatabaseGrpcIo {
       return new MovieRatingDatabaseStub(channel, callOptions);
     }
 
-    
+    /**
+         * <pre>
+         * 
+         * option (google.api.http) = {
+         * get: &quot;/movie_details/{id}&quot;
+         * };
+         * </pre>
+         */
     public io.vertx.core.Future<com.julienviet.demos.movierating.MovieDetails> getMovieDetails(com.julienviet.demos.movierating.MovieId request) {
       return io.vertx.grpcio.common.impl.stub.ClientCalls.oneToOne(context, request, delegateStub::getMovieDetails);
     }
 
-    
+    /**
+         * <pre>
+         * 
+         * option (google.api.http) = {
+         * post: &quot;/movie_ratings&quot;
+         * };
+         * </pre>
+         */
     public io.vertx.core.Future<com.julienviet.demos.movierating.Empty> rateMovie(com.julienviet.demos.movierating.MovieRating request) {
       return io.vertx.grpcio.common.impl.stub.ClientCalls.oneToOne(context, request, delegateStub::rateMovie);
     }
 
-    
+    /**
+         * <pre>
+         * 
+         * option (google.api.http) = {
+         * get: &quot;/movie_ratings/{id}&quot;
+         * };
+         * </pre>
+         */
     public io.vertx.core.Future<com.julienviet.demos.movierating.MovieRatingDetails> getMovieRating(com.julienviet.demos.movierating.MovieId request) {
       return io.vertx.grpcio.common.impl.stub.ClientCalls.oneToOne(context, request, delegateStub::getMovieRating);
     }
