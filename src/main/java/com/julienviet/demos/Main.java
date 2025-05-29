@@ -1,5 +1,6 @@
 package com.julienviet.demos;
 
+import com.julienviet.demos.db.TestContainerHelper;
 import com.julienviet.demos.movierating.*;
 import io.vertx.core.Future;
 import io.vertx.core.VerticleBase;
@@ -17,7 +18,7 @@ import java.util.function.Function;
 public class Main extends VerticleBase {
 
   public static void main(String[] args) {
-    PostgresServerHelper helper = new PostgresServerHelper();
+    TestContainerHelper helper = new TestContainerHelper();
     PgConnectOptions options = helper.startDb();
     Vertx vertx = Vertx.vertx();
     vertx.deployVerticle(new Main(options)).await();

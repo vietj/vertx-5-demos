@@ -1,14 +1,14 @@
-package com.julienviet.demos;
+package com.julienviet.demos.db;
 
 import io.vertx.pgclient.PgConnectOptions;
 import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.GenericContainer;
 
-public class PostgresServerHelper {
+public class TestContainerHelper {
 
   private final GenericContainer<?> postgres;
 
-  public PostgresServerHelper() {
+  public TestContainerHelper() {
     postgres = new GenericContainer<>("postgres:17")
       .withEnv("POSTGRES_PASSWORD", "postgres")
       .withExposedPorts(5432)
