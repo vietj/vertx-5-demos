@@ -9,17 +9,16 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.grpc.reflection.ReflectionService;
-import io.vertx.grpc.server.GrpcServer;
+import io.vertx.grpcio.server.GrpcIoServer;
 
 public class HelloWorld {
 
   public static void main(String[] args) {
     Vertx vertx = Vertx.vertx();
     HttpServer httpServer = vertx.createHttpServer();
-    GrpcServer grpcServer = GrpcServer.server(vertx);
+    GrpcIoServer grpcServer = GrpcIoServer.server(vertx);
     grpcServer.addService(ReflectionService.v1());
 
-/*
     grpcServer.addService(new GreeterGrpc.GreeterImplBase() {
       @Override
       public void sayHello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
@@ -27,7 +26,8 @@ public class HelloWorld {
         responseObserver.onCompleted();
       }
     });
-*/
+
+/*
     grpcServer.addService(new GreeterGrpcService() {
       @Override
       public Future<HelloReply> sayHello(HelloRequest request) {
@@ -37,6 +37,7 @@ public class HelloWorld {
           .map(v -> HelloReply.newBuilder().setMessage("Hello " + request.getName()).build());
       }
     });
+*/
 
     httpServer
       .requestHandler(grpcServer)
