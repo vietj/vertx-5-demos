@@ -2,9 +2,7 @@ package com.julienviet.demos;
 
 import com.julienviet.demos.db.TestContainerHelper;
 import com.julienviet.demos.movierating.*;
-import io.vertx.core.Future;
-import io.vertx.core.VerticleBase;
-import io.vertx.core.Vertx;
+import io.vertx.core.*;
 import io.vertx.core.http.HttpServer;
 import io.vertx.grpc.common.GrpcStatus;
 import io.vertx.grpc.reflection.ReflectionService;
@@ -21,7 +19,7 @@ public class MovieRatings extends VerticleBase {
     TestContainerHelper helper = new TestContainerHelper();
     PgConnectOptions options = helper.startDb();
     Vertx vertx = Vertx.vertx();
-    vertx.deployVerticle(new MovieRatings(options)).await();
+    vertx.deployVerticle(new MovieRatings(options), new DeploymentOptions().setThreadingModel(ThreadingModel.VIRTUAL_THREAD)).await();
   }
 
   private final PgConnectOptions options;
@@ -94,21 +92,6 @@ public class MovieRatings extends VerticleBase {
     return httpServer
       .requestHandler(grpcServer)
       .listen(8080, "localhost");
-
-    // grpcurl -plaintext localhost:8080 list
-    // grpcurl -plaintext localhost:8080 list examples
-    // grpcurl -plaintext localhost:8080 list examples.grpc.MovieRatingDatabase
-    // grpcurl -plaintext localhost:8080 describe examples.grpc.MovieRatingDatabase
-    // grpcurl -plaintext localhost:8080 describe examples.grpc.MovieId
-
-    // grpcurl -plaintext -d '{"id": "starwars"}' localhost:8080 examples.grpc.MovieRatingDatabase/GetMovieDetails
-    // grpcurl -plaintext -d '{"id": "starwars","rating":5}' localhost:8080 examples.grpc.MovieRatingDatabase/RateMovie
-    // grpcurl -plaintext -d '{"title": "Star Wars","rating":5}' localhost:8080 examples.grpc.MovieRatingDatabase/RateMovie
-
-    // curl --header "Content-Type: application/json" --request POST --data '{"id":"starwars"}' http://localhost:8080/examples.grpc.MovieRatingDatabase/GetMovieDetails
-    // curl --header "Content-Type: application/json" http://localhost:8080/movie_details/starwars
-    // curl --header "Content-Type: application/json" http://localhost:8080/movie_ratings/starwars
-    // curl --header "Content-Type: application/json" --request POST --data '{"id":"starwars","rating":5}' http://localhost:8080/movie_ratings
   }
 
   // Helper

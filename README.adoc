@@ -1,0 +1,56 @@
+= gRPC Demo with Vert.x 5
+
+Requirements:
+
+* Java 11 or later
+* Maven
+* curl
+* [grpcurl](https://github.com/fullstorydev/grpcurl)
+
+== HTTP Hello World
+
+* create a main class
+* create a Vert.x HTTP server
+* run the server
+* `curl http://localhost:8080`
+
+== gRPC Hello World
+
+See `HelloWorld.java`
+
+* add a gRPC server
+* add a gRPC service extending `GreeterGrpc.GreeterImplBase`
+* add reflection service
+* run the server
+* grpcurl the server with various commands
+** `grpcurl -plaintext localhost:8080 list`
+** `grpcurl -plaintext localhost:8080 list examples.grpc.Greeter`
+** `grpcurl -plaintext localhost:8080 describe examples.grpc.Greeter`
+** `grpcurl -plaintext -d '{"name": "Julien"}' localhost:8080 examples.grpc.Greeter/SayHello`
+* show the Vert.x generator extending `GreeterGrpcService`
+* do again some interactions
+* show transcoding
+** `curl --header "Content-Type: application/json" --request POST --data '{"name":"Julien"}' http://localhost:8080/examples.grpc.Greeter/SayHello`
+
+== Movie rating gRPC
+
+Use from `MovingRatings.java`
+
+* run and perform some interactions
+** `grpcurl -plaintext localhost:8080 list`
+** `grpcurl -plaintext localhost:8080 describe examples.grpc.MovieRatingDatabase`
+** `grpcurl -plaintext localhost:8080 describe examples.grpc.MovieId`
+** `grpcurl -plaintext -d '{"id": "starwars"}' localhost:8080 examples.grpc.MovieRatingDatabase/GetMovieDetails`
+** `grpcurl -plaintext -d '{"id": "starwars","rating":5}' localhost:8080 examples.grpc.MovieRatingDatabase/RateMovie`
+** `grpcurl -plaintext -d '{"title": "Star Wars","rating":5}' localhost:8080 examples.grpc.MovieRatingDatabase/RateMovie`
+** `curl --header "Content-Type: application/json" --request POST --data '{"id":"starwars"}' http://localhost:8080/examples.grpc
+.MovieRatingDatabase/GetMovieDetails`
+* Making a rest service
+** uncomment transcoding annotations in `movie_rating.proto`
+** regenerate the code with `mvn clean package`
+** interact with the service with idiomatic rest
+*** `curl --header "Content-Type: application/json" http://localhost:8080/movie_details/starwars`
+*** `curl --header "Content-Type: application/json" --request POST --data '{"id":"starwars","rating":5}' http://localhost:8080/movie_ratings`
+* Virtual thread part
+** Update the implementation of `rateMovie` to use async/await instead of future compose
+

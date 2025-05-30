@@ -44,13 +44,4 @@ public class HelloWorld {
       .listen(8080, "localhost")
       .await();
   }
-
-
-  // grpcurl -plaintext localhost:8080 list
-  // grpcurl -plaintext localhost:8080 list examples.grpc.Greeter
-  // grpcurl -plaintext localhost:8080 list examples.grpc.Greeter
-  // grpcurl -plaintext localhost:8080 describe examples.grpc.Greeter
-  // grpcurl -plaintext -d '{"name": "Julien"}' localhost:8080 examples.grpc.Greeter/SayHello
-  // curl --header "Content-Type: application/json" --request POST --data '{"name":"Julien"}' http://localhost:8080/examples.grpc.Greeter/SayHello
-
 }
